@@ -1,0 +1,20 @@
+ <!-- app/templates/register.html -->
+ 
+ 
+ {% extends 'base.html' %}
+ {% import 'bootstrap/wtf.html' as wtf %}
+ 
+ 
+ {% block app_context %}
+     <div class="row">
+         <div class="col-md-4">
+             <!-- Emtpy column -->
+         </div>
+         <div class="col-md-4">
+             {{ wtf.quick_form(form) }}
+         </div>
+         <div class="col-md-4">
+             <!-- Emtpy column -->
+         </div>
+     </div>
+ {% endblock %} 
