@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Streaming </title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles1.css"> <!-- Link your CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Link Font Awesome for icons -->
+
+  <link rel="stylesheet" href="style.css" class="ref" />
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo">
+          <a href="#">
+            <img src="https://yt3.googleusercontent.com/iXKrx545Qv9XAXPxepupFI3pS4oI49Gt1ppJLWDwtkqm_CKBlTAiULwZTfFPwplx4klHN8A3_w=s900-c-k-c0x00ffffff-no-rj" alt="Logo" />
+          </a>
+        </div>
+  
+        <div class="navigation">
+          <ul>
+            <li>
+              <a href="#">
+                <span class="fa fa-home"></span>
+                <span>Home</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#">
+                <span class="fa fa-search"></span>
+                <span>Search</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href=front2.html>
+                <span class="fa fas fa-book"></span>
+                <span>playlists</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+  
+        <div class="navigation">
+          <ul>
+            <li>
+              <a href="#">
+                <span class="fa fas fa-plus-square"></span>
+                <span>Payment</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#">
+                <span class="fa fas fa-heart"></span>
+                <span>Cart</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+  
+        <div class="policies">
+          <ul>
+            <li>
+              <a href="#">Cookies</a>
+            </li>
+            <li>
+              <a href="#">Privacy</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+<div class="now-playing">
+  <h2>Now Playing</h2>
+  <div class="song-info">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBYamQjTF5tYmyCmUqzn_U5sD-bWhFsjdd9JOgOoFNw&s" alt="Song Image">
+    <div style="display: flex; flex-direction: column;">
+      <h3>Watercolor Eyes</h3>
+      <p>Lana Del Ray</p>
+    </div>
+  </div>
+</div>
+
+<div class="player">
+  <div class="player-controls">
+    <img src="assets/player_icon1.png" class="player-control-icon" />
+    <img src="assets/player_icon2.png" class="player-control-icon" />
+    <img src="assets/player_icon3.png" class="player-control-icon" style="opacity: 1; height: 2rem" />
+    <img src="assets/player_icon4.png" class="player-control-icon" />
+    <img src="assets/player_icon5.png" class="player-control-icon" />
+    <div class="controls">
+      <!-- <img src="assets/controls_icon1.png" class="controls-icon"> -->
+      <i class="fa-sharp fa-solid fa-music"></i>
+      <img src="assets/controls_icon3.png" class="controls-icons" />
+      <img src="assets/controls_icon4.png" class="controls-icons" />
+      <!-- <img src="assets/controls_icon5.png" class="controls-icons-speaker" /> -->
+      <i class="fa-solid fa-volume-high"></i>
+      <input type="range" step="10" class="vol-bar" />
+    </div>
+  </div>
+  <div class="playback-bar">
+    <span class="curr-time">00:00</span>
+    <input type="range" min="0" max="100" step="1" class="progress-bar" />
+    <span class="tot-time">3:33</span>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- JavaScript for dynamic loading and music player functionality -->
+<script src="script.js"></script> <!-- Link your JavaScript file -->
+</body>
+</html>

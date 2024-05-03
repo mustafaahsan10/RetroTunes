@@ -1,0 +1,143 @@
+
+
+.song-info img {
+    width: 250px; /* Set the width */
+    height: 210px; /* Set the height */
+    border-radius: 8px; /* Optional: add border radius for rounded corners */
+    margin-bottom: 10px;
+  }
+
+  .now-playing {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    color: aliceblue;
+    margin-bottom: 20px;
+    margin-left: 260px;
+    column-gap: 10px;
+  }
+  
+  .now-playing h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #fffefe;
+  }
+  
+  .song-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+  }
+  
+  .song-info h3 {
+    font-size: 25px;
+    margin: 0;
+  }
+    
+
+
+.player {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-control-icon {
+  height: 1rem;
+  margin-right: 1.75rem;
+  opacity: 0.7;
+}
+
+.player-control-icon:hover {
+  opacity: 1;
+}
+
+.controls-icons {
+    height: 1rem;
+  margin-right: 1.75rem;
+  opacity: 0.7;
+
+}
+
+.playback-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  width: 80%;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 100;
+  height: 16px;
+}
+
+.progress-bar::-webkit-slider-runnable-track {
+  background-color: #fffefe;
+  border-radius: 100px;
+  height: 0.3rem;
+  cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: #1bd760;
+  border-radius: 50%;
+  margin-top: -6px;
+}
+
+.progress-bar::-moz-range-track {
+  background-color: #fffefe;
+}
+
+.progress-bar::-moz-range-thumb {
+  background-color: #1bd760;
+  height: 14px;
+  width: 14px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.vol-bar {
+  width: 130px;
+  height: 6px;
+  appearance: none;
+  background-color: #fffefe;
+  cursor: pointer;
+}
+
+.vol-bar::-webkit-slider-thumb {
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  background-color: #1bd760;
+  border-radius: 50%;
+  margin-top: -4px;
+}
+
+.vol-bar::-moz-range-thumb {
+  background-color: #1bd760;
+  height: 14px;
+  width: 14px;
+}

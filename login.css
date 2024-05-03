@@ -1,0 +1,119 @@
+@import url(https://db.onlinewebfonts.com/c/01173b246d9d9ea808ea75a26b3b61bb?family=CircularSpotifyTxT-Black);
+
+
+@font-face {
+    font-family: myfont;
+    src: url('GothamMedium.ttf');
+}
+
+body {
+    font-family: myfont;    margin: 0;
+    padding: 0;
+
+    background: linear-gradient(black,rgb(91, 1, 91) );
+    
+    background-attachment: fixed;
+}
+
+
+header img {
+    width: 100px;
+    
+}
+
+.navigation {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #000;
+    padding: 10px 20px;
+}
+
+main {
+    padding: 50px;
+}
+
+.login {
+    position: absolute;
+    width: 614px;
+    height: 336px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #B97BB6;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 25px;
+}
+
+    
+
+
+
+.login h1 {
+    text-align: center;
+    font-family: myfont;    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left; /* Reset label text alignment */
+}
+
+.form-group input {
+    width: 60%; /* Adjust the width as needed */
+    padding: 10px;
+    border: 1px solid #918a8a;
+    border-radius: 3px;
+}
+
+
+.button{
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center;
+    cursor: pointer;
+}
+a {
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+
+a:hover {
+    text-decoration: hotpink;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #120101;
+    
+    color: purple;
+    background-color: #080000;
+}
+
+
+nav h1{
+font-size: 2em;
+}
+
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Assuming you have a CSS file for styling -->
+  <link rel="icon" type="image/x-icon" href="icon.png">
+</head>
+<body>
+  <div class="sidebar">
+    <!-- Sidebar content remains the same -->
+  </div>
+
+  <div class="main-container payment-container">
+    <div class="topbar">
+      <!-- Topbar content remains the same -->
+    </div>
+    
+    <div class="sidebar">
+        <div class="logo">
+          <a href="#">
+            <img src="https://yt3.googleusercontent.com/iXKrx545Qv9XAXPxepupFI3pS4oI49Gt1ppJLWDwtkqm_CKBlTAiULwZTfFPwplx4klHN8A3_w=s900-c-k-c0x00ffffff-no-rj" alt="Logo" />
+          </a>
+        </div>
+  
+        <div class="navigation">
+          <ul>
+            <li>
+              <a href="#">
+                <span class="fa fa-home"></span>
+                <span>Home</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#">
+                <span class="fa fa-search"></span>
+                <span>Search</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#">
+                <span class="fa fas fa-book"></span>
+                <span>Your Library</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+  
+        <div class="navigation">
+          <ul>
+            <li>
+              <a href="#">
+                <span class="fa fas fa-plus-square"></span>
+                <span>Create Playlist</span>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#">
+                <span class="fa fas fa-heart"></span>
+                <span>Liked Songs</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+  
+      
+      </div>
+  
+    
+  
+  
+
+    <div class="payment-form">
+      <h2>Payment Details</h2>
+      <form action="payment_process.php" method="POST">
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" required>
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required>
+        <label for="name_on_card">Name on Card:</label>
+        <input type="text" id="name_on_card" name="name_on_card" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required>
+        <button type="submit">Pay Now</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script
+src="https://kit.fontawesome.com/23cecef777.js"
+crossorigin="anonymous"
+></script>
+</html>
