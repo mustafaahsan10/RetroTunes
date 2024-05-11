@@ -1,0 +1,90 @@
+{% extends "base.html" %} {% block title %}home{% endblock title %} {% block
+signup %}
+
+<div class="signup">
+  
+<div class="form">
+<div class="box">
+
+
+  
+<form method="POST"  enctype="multipart/form-data">
+  <h3 align="center">Sign Up</h3>
+  <div class="form-group">
+    <div  align="center" class="profile_icon" hight="30px">
+      <i class="fas fa-user-plus">
+        <input
+          type="file"
+          name="image"
+          id="profile_picture"
+          accept="image/*"
+          class="form-control-file d-none "
+          onchange="displayFileName(this)" /></i
+      >
+      <label for="profile_picture"> profile</label>
+      
+    </div><br />
+ <div class="from-values">
+    <label for="username"> Username   <i class="fas fa-user"></i> </label>
+    <div class="inputs">
+    <input
+      type="text"
+      name="sign-username"
+      id="sign-username"
+      class="form-control"
+      placeholder="Enter Username"
+    /> </div>
+</div>
+
+    <div class="from-values">
+    <label for="email"> Email Id   <i class="far fa-envelope"></i></label>
+    <div class="inputs">
+      
+  
+    <input
+      type="text"
+      name="sign-email"
+      id="sign-email"
+      class="form-control"
+      placeholder="Enter Email"
+    />    </div></div>
+ <div class="from-values">
+    <label for="password1"> Password  <i class="fas fa-unlock"></i></i></label>
+    <div class="inputs">
+    <input
+      type="password"
+      name="sign-password1"
+      id="sign-password"
+      class="form-control"
+      placeholder="Enter password"
+    /> </div></div>
+ <div class="from-values">
+    <label for="password2"> Password Again  <i class="fas fa-lock"></i></label>
+      <div class="inputs">
+    <input
+      type="password"
+      name="sign-password2"
+      id="sign-password"
+      class="form-control"
+      placeholder="Enter password Again"
+    />
+   </div></div>
+
+  
+    <label for="checkbox"> Creator </label>
+    <input
+      type="checkbox"
+      name="is_creator"
+      id="is_creator"
+      class="form-check-input"
+    />
+
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Sign UP</button>
+    </div>
+  </div>
+</form>
+ </div> 
+</div>
+</div>
+{% endblock %}

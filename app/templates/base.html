@@ -1,59 +1,122 @@
-<!-- app/templates/base.html -->
-{% extends "bootstrap/base.html" %}
-
-{% block head %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-{% endblock %}
-
-{% block title %}
-    {% if title %}
-        {{ title }} - Postgres
-    {% else %}
-        Using Postgres
-    {% endif %}
-{% endblock %}
-
-{% block navbar %}
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('profile') }}">Postgres Demo</a>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Home{% endblock title %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/static/css/style.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+        <script src="https://unpkg.com/htmx.org@1.9.4"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" 
+            integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    <body>
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                        <!-- Font Awesome icon for the navbar toggler -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 0 448 512">
+                            <style>svg{fill:#80419f}</style>
+                            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+                        </svg>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link" href="/home" style="margin-right: 10px;">Home</a>
+                            {% if current_user.is_authenticated %}
+                                {% if current_user.is_admin %}
+                                    <a class="nav-item nav-link" href="/admin_dashboard/{{ current_user.username }}" style="margin-right: 10px;">Admin dashboard</a>
+                                    <a class="nav-item nav-link" href="/add_item" style="margin-right: 10px;">Add Item</a>
+                                {% endif %}
+                                <a class="nav-item nav-link" href="/market" style="margin-right: 10px;">Marketplace</a>
+                                <a class="nav-item nav-link" href="/set_budget" style="margin-right: 10px;">Set Budget</a>
+                                <a class="nav-item nav-link" href="/logout" style="margin-right: 10px;">Logout</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="/login" style="margin-right: 10px;">Login</a>
+                                <a class="nav-item nav-link" href="/signup" style="margin-right: 10px;">Signup</a>
+                                <a class="nav-item nav-link" href="/admin" style="margin-right: 10px;">Admin</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="profile">
+                        {% block profile %}
+                        {% if current_user.is_authenticated %}
+                        <div class="d-flex align-items-center">
+                            <a href="/user/{{ current_user.username }}">
+                                <img src="data:{{ current_user.mimetype_profile }};base64,{{ current_user_profile_image }}" alt="Profile Image" class="float-right" />
+                            </a>
+                            <div class="ms-3 text-white">
+                                <strong>Budget: ${{ current_user.budget | default('0', true) }}</strong>
+                            </div>
+                        </div>
+                        {% else %}
+                            <a href="/">
+                                <div class="logo">
+                                    <span class="navbar-brand">Wolf</span>
+                                </div>
+                            </a>
+                        {% endif %}
+                        {% endblock %}
+                    </div>
+                </nav>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('login') }}">Login</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-{% endblock %}
-
-{% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
+        </header>
+        {% block userprofile %} {% endblock userprofile %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <div class="alert alert-info">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </div>
+                {% for category, message in messages %}
+                    {% if category=="error" %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" the="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
         {% endwith %}
-        {% block app_context %}{% endblock %}
-    </div>
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-{% endblock %}
+        {% if not current_user.is_authenticated %}
+            {% if request.path=="/login" or request.path=="/admin" %}
+                {% block login %} {% endblock login %}
+            {% endif %}
+            {% if request.path=="/signup" %}
+                {% block signup %} {% endblock signup %}
+            {% endif %}
+            {% if request.path=="/" %}
+                <section class="main">
+                    <div class="main-text">
+                        <h3>Play the</h3>
+                        <div class="main_section"><h5>Music</h5><div class="and"><h1>&</h1></div></div>
+                        <div class="main_section"><h1>Refresh your</h1><div class="and"><h5>soul</h5></div></div>
+                        <p>World of Music</p>
+                        <div class="buttons">
+                            <a class="ct_btn" href="/login">Login</a>
+                            <a class="ct_btn" href="/signup">Signup</a>
+                        </div>
+                    </div>
+                    <div class="main-img">
+                        <img src="{{ url_for('static', filename='assets/download2.png') }}" alt="image">
+                    </div>
+                </section>
+            {% endif %}
+        {% else %}
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        {% endif %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    </body>
+</html>
