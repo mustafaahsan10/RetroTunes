@@ -1,0 +1,288 @@
+{% extends "posts_div.html" %}{% block title %}admin_dashboard{% endblock
+title %}
+{% block dashboard %}
+{% if current_user.is_admin %}
+
+  <div class="admin_section">    
+    <div class="admin_section1">
+    <div class="first_row">
+      <div class="admin_card block">
+        <div class="admin_image">
+            <img
+                  src="data:{{ user.image_mimetype }};base64,{{ current_user_profile_image}}"
+                  alt="Profile Image"
+                />
+        </div>
+        <div class="admin_name">
+          <h1>{{user.username}}</h1>
+        </div>
+      </div>
+      <div class="statistics block">
+          <div> <h4>  <i class="fas fa-users 2x" style="color: #80419fdb;"></i>  {{statistics["users"]}}</h4>  user</div>
+          <div><h4>   <i class="fa-solid fa-music" style="color: #80419fdb;"></i>   {{statistics["songs"]}}</h4> songs</div>
+          <div><h4>   <i class="fa-solid fa-compact-disc" style="color: #80419fdb;"></i>    {{statistics["playlist"]}}</h4>playlists</div> 
+      </div>
+      </div>
+    <div class="second_row"> 
+        <div class="chartjs block">
+            <canvas id="myChartSong"></canvas>
+        </div>
+        <div class="chartjs block" >
+            <canvas id="myChartPlaylist"></canvas>
+        </div>
+        <div class="chartjs block" >
+            <canvas id="myChart2"></canvas>
+        </div>
+       </div>
+     </div>
+    <div class="admin_section2">
+    <div class="all_user_table">
+      {%if current_user.is_admin %}
+      <table class="table custom-table custom-table-bordered custom-table-text">
+        <thead>
+          <tr>
+            <th>Profile</th>
+            <th>Username</th>
+            <th>User Type</th>
+            <th>Remove User</th>
+          </tr>
+        </thead><tbody>
+        {% for user in users %}
+          <tr>
+            <td><a href="/user/{{ user.username }}">
+            <img
+                src="data:{{ user.mimetype_profile }};base64,{{user_profile_images[user.id]}}"
+                alt="Profile Image"
+                height="40px"
+                width="40px"
+                style="border-radius: 50%"
+              /></a></td>
+            <td>{{ user.username }}</td>
+            {% if user.is_admin %}
+            <td>Admin</td>
+            {%elif user.is_creater%}
+            <td>creator</td>
+            {%else%}
+            <td>User</td>
+            {%endif%}
+            <td><a href="/delete-user-account/{{ user.username }}" class="btn btn-danger">Delete</a></td>
+          </tr>    
+          {% endfor %}
+      </tbody>
+      </table>
+      {% else %}
+        <div  class=" unwanted-move">
+          <p> sorry your not a admin </p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+    </div>
+    {% else %}
+        <div  class=" unwanted-move" >
+          <h1> <i class="far fa-circle-xmark" style="color: #ffffff;"></i> sorry your not a admin </h1>
+        </div>
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+//   const ctx = document.getElementById('myChart');
+
+// const song_ratings = {{song_ratings}}
+// const playlist_ratings ={{playlist_ratings}}
+
+//  let scatterChart = new Chart(ctx, {
+//   type: "scatter",
+//   data: {
+    
+//     datasets: [
+//       {
+//         label: "Range 1-2",
+//         data: prepareData(song_ratings, 1, 2),
+//         backgroundColor: 'rgba(128, 65, 157, 0.5)',
+//       },
+//       {
+//         label: "Range 2-3",
+//         data: prepareData(song_ratings, 2, 3),
+//         backgroundColor: 'rgba(128, 65, 157, 0.5)',
+//       },
+//       {
+//         label: "Range 3-4",
+//         data: prepareData(song_ratings, 3, 4),
+//         backgroundColor: 'rgba(128, 65, 157, 0.5)',
+//       },
+//       {
+//         label: "Range 4-5",
+//         data: prepareData(song_ratings, 4, 5),
+//         backgroundColor: 'rgba(128, 65, 157, 0.5)',
+//       },
+//       {
+//         label: "Playlists in Range 1-2",
+//         data: prepareData(playlist_ratings, 1, 2),
+//         backgroundColor: 'rgba(213, 160, 240, 0.5)',
+        
+//       },
+//       {
+//         label: "Playlists in Range 2-3",
+//         data: prepareData(playlist_ratings, 2, 3),
+//         backgroundColor: 'rgba(213, 160, 240, 0.5)',
+         
+//       },
+//       {
+//         label: "Playlists in Range 3-4",
+//         data: prepareData(playlist_ratings, 3, 4),
+//         backgroundColor: 'rgba(213, 160, 240, 0.5)',
+        
+//       },
+//       {
+//         label: "Playlists in Range 4-5",
+//         data: prepareData(playlist_ratings, 4, 5),
+//         backgroundColor: 'rgba(213, 160, 240, 0.5)',
+//       },
+
+
+//     ],
+//   },borderWidth:2,
+//   options: {
+//     scales: {
+//       x: {
+//         type: 'linear',
+//         position: 'bottom',
+//         title: {
+//           display: true,
+//           text: 'Rating Range',
+//         },
+//       },
+//       y: {
+//         type: 'linear',
+//         position: 'left',
+//         title: {
+//           display: true,
+//           text: 'Average Rating',
+//         },
+//       },
+//     },
+//   },
+// });
+
+
+// function prepareData(data, lower, upper) {
+//   const dataPoints = [];
+
+//   for (const songId in data) {
+//     const rating = data[songId];
+//     if (rating >= lower && rating < upper) {
+//       dataPoints.push({ x: Math.random() * 4 + 1, y: rating });
+//     }
+//   }
+
+//   return dataPoints;
+// }
+
+// chart for songs
+
+const ctxSong = document.getElementById('myChartSong'); 
+const song_ratings = {{song_ratings}}; 
+const labels = Object.keys(song_ratings);
+
+let songChart = new Chart(ctxSong, {
+  type: "bar",
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: "Song Ratings",
+        data: labels.map(songId => song_ratings[songId] || 0), 
+        backgroundColor: 'rgba(75, 192, 192, 0.5)', 
+      },
+    ],
+  },
+  borderWidth: 2,
+  options: {
+    scales: {
+      x: {
+        type: 'category',
+        title: {
+          display: true,
+          text: 'Songs',
+        },
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Average Rating',
+        },
+      },
+    },
+  },
+});
+
+</script>
+
+
+<script>  
+
+// chart for playlist
+
+        const ctxPlaylist = document.getElementById('myChartPlaylist'); 
+        const playlist_ratings = {{playlist_ratings}}; 
+        const labelsPlaylist = Object.keys(playlist_ratings);
+
+        let playlistChart = new Chart(ctxPlaylist, {
+            type: "bar",
+            data: {
+                labels: labelsPlaylist,
+                datasets: [
+                    {
+                        label: "Playlist Ratings",
+                        data: labelsPlaylist.map(playlistId => playlist_ratings[playlistId] || 0), 
+                        backgroundColor: '#7f419edb ', 
+                    },
+                ],
+            },
+            borderWidth: 2,
+            options: {
+                scales: {
+                    x: {
+                        type: 'category',
+                        title: {
+                            display: true,
+                            text: 'Playlists',
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Average Rating',
+                        },
+                    },
+                },
+            },
+        });
+</script>
+<script>
+
+let doc = document.getElementById('myChart2');
+let massbarChart = new Chart(doc,{
+  type:"doughnut",
+  data:{
+    labels:["users","songs","playlist"],
+    datasets:[{
+      label:"data",
+      data:[
+        {{statistics["users"]}}, {{statistics["songs"]}}, {{statistics["playlist"]}}
+      ],
+      backgroundColor:[
+        '#80419fdb',
+        '#d5a0f0',
+        '#ffffff',
+      ],
+      borderWidth:0
+     
+    }]
+  },
+  options:{}
+})
+</script>
+ {% endblock dashboard %}

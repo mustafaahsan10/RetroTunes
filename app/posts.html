@@ -1,0 +1,60 @@
+{% extends "posts_div.html" %} {% block title %}{{username}}'s Posts{% endblock
+title %}
+{% block userprofile %}
+<div class="userprofile">
+  <div class="profile">
+    
+ <div class="profile-img">
+        {% if user==current_user %}
+        <img
+          src="data:{{ user.image_mimetype }};base64,{{ current_user_profile_image}}"
+          alt="Profile Image"
+          
+          
+        />
+        {% else %}
+        <img
+          src="data:{{ user.image_mimetype }};base64,{{user_profile_images[user.id]}}"
+          alt="Profile Image"
+        />
+        {% endif %}
+
+      </div>
+      <div class="profile_data">
+
+    <div class="profile-username">
+        <h1>{{user.username}}</h1>
+  
+    <div class="profile-usertype">
+    {% if user.is_admin %}
+      <h5>Admin</h5>
+      {%elif user.is_creater%}
+      <h5>creator</h5>
+      {%else%}
+      <h5>User</h5>
+      {%endif%}
+    </div>
+      </div>
+      {%if not user.is_creater and not user.is_admin %}
+      {% if current_user.id==user.id %}
+      
+     
+      <div class="icon4">
+        <a href="/creator_profile/{{user.username}}">
+
+          <i class="fas fa-address-card"></i>
+        become Creator 
+        
+        </a></div>
+      {% endif %}
+        {% endif %}
+    </div>
+</div>
+ </div>
+
+{% endblock  %}
+
+
+
+      
+    

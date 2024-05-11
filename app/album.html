@@ -1,0 +1,182 @@
+{% extends "posts_div.html" %}
+{% block title %}
+album
+{% endblock title %}
+{% block content %}
+
+<div class="post_id">
+<div class="album">
+ <div class="album-profile"> 
+  <div class="playlist-heading">
+    <div class="song-img">
+      <img src="data:image/jpeg;base64,{{ album_data.image }}" class="song-profile-img">
+    </div>
+    <div class="profile-name">
+      <h2>{{ album_data.name }}</h2>
+      <h5>
+      <a class="song-profile-user" href="#">{{ album_data.artist }}</a>
+      {% if album.user_id==current_user.id or current_user.is_admin %}
+         <a href="/edit-album/{{album.id}}"> <i class="fa-solid fa-pen" style="color: #ffffff;"></i></a>
+            </h5>
+        {% endif %}
+        <p  class="rating-star"> {{album_data.author  }} </p>
+    </div>
+  </div>
+  <div class="table3">
+ <table class="table custom-table1 custom-table-bordered custom-table-text">
+  <thead>
+    
+  </thead>  
+  <tbody>
+  {% for song in songs %}
+ 
+    <tr>
+      <td class="profile"><img
+        src="data:image/jpeg;base64,{{ song_data[song.id].song_profile }}"
+        alt="Song Image"
+       
+         height="40px"
+          width="40px"
+          style="border-radius: 50%"
+        class="card-img-top"
+    /> </td>
+
+     <td >
+     <div class="table-items">
+      
+     
+      <div> 
+     {{ song.song_name }}</div>  
+     <div>
+      
+     {{ song_data[song.id].author }}</div></div></td>
+   
+
+      <td class="icon3"> 
+      <div onclick="playAudio('{{ song_data[song.id].song }}','{{ song_data[song.id].song_name }}','{{ song_data[song.id].song_profile }}','{{ song.id }}')">
+
+      <i class="fa-regular fa-circle-play"></i>  </div></td>
+
+      <td>
+        {% if album.user_id == current_user.id %}
+        <button type="button" class="btn btn-lg" data-bs-toggle="dropdown">
+            <span class="font-weight-bold" style="color:white"> &#10247;</span>
+        </button>
+            <ul class="dropdown-menu"  style="background-color: black;">     
+                <li>
+                  <form method="POST" action="/remove_song_from_album/{{ album.id }}/{{ song.id }}">
+                   <input type="hidden" name="album_id" value="{{ album_id }}">
+                    <input type="submit" value="Remove"  class="dropdown-item" >
+                  </form>
+                 </li>
+             </ul>
+       </td>
+      {% endif %}
+    </tr>    
+    {% endfor %}
+
+ </tbody></table>
+ 
+</div>
+</div>
+<div class="heading">
+  <h1>add songs </h1>
+    
+</div>
+
+<div class="table2">
+ <table class="table custom-table custom-table-bordered custom-table-text">
+
+  <tbody>
+    {% for song in all_songs %}
+    {% if song.id not in album.songs|map(attribute='id') %}
+    
+
+    <tr>
+      <td class="profile">
+         <img
+        src="data:image/jpeg;base64,{{ song_data[song.id].song_profile }}"
+        alt="Song Image"
+       
+         height="40px"
+          width="40px"
+          style="border-radius: 50%"
+        class="card-img-top"
+    /> 
+      </td>
+      <td>{{ song.song_name }}</td>
+      <td>{{  song_data[song.id].author }}</td>
+      <td>
+      {% if album.user_id == current_user.id %}
+        <form method="POST" action="/add_song_to_album/{{ album.id}}/{{ song.id }}">
+        <input type="hidden" name="album_id" value="{{ albul_id }}">
+          <input type="submit" value="Add" class="btn btn-info">
+        </form>
+        {% else %}
+        <div class="icon3"onclick="playAudio('{{ song_data[song.id].song }}','{{ song_data[song.id].song_name }}','{{ song_data[song.id].song_profile }}','{{ song.id }}')">
+          <i class="fa-regular fa-circle-play"></i>  </div>
+      {% endif %}
+      </td>
+    </tr>
+     
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+    
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+<footer class="fixed-footer">
+    <div class="footer d-flex justify-content-between align-items-center">
+        <div class="footer-img">
+            <a class="song" href="">
+                <img src="{{ url_for('static', filename='assets/download.jpg') }}" alt="Song Image" class="song-image" height="50px" width="50px" />
+            </a>
+        </div>
+        <div class="song-details">
+            <p id="song-name" class="song-name">Song</p>
+     
+       </div>
+        <div class="audio-controls">
+            <audio id="audio-player" class="audio" controls>
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+</footer>
+<script>
+    function playAudio(songData, songName, songProfile,songId) {
+        var audioPlayer = document.getElementById('audio-player');
+        var songNameElement = document.getElementById('song-name');
+
+        audioPlayer.src = 'data:audio/mp3;base64,' + songData;
+        audioPlayer.play();
+        songNameElement.textContent = songName;
+
+        var songImageElement = document.querySelector('.song-image');
+        songImageElement.src = "data:image/jpeg;base64,"+songProfile;
+        
+        var songLink = document.querySelector('.song');
+        songLink.href = "/song/" + songId;
+
+    }
+</script>
+
+       
+
+{% endblock content %}
