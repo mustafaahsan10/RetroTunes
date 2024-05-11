@@ -1,0 +1,369 @@
+{% extends "base.html" %}
+{% block title %}content{% endblock title %}
+
+{% block content %}
+
+
+ {% block dashboard %}
+ 
+ {% endblock dashboard %}
+
+
+{% block songs %}
+
+{% endblock songs %}
+
+
+<div class="post_id">
+
+
+{% if request.path=="/home" %}
+
+<div class="section1"  >
+  <div class="section1-heading">
+    <p > Top songs</p>
+  </div>
+   
+   
+ <div class="section1-content top-songs">
+
+{% for song_id, song_data in sorted_songs.items() %}
+ 
+  <div class="card"  onclick="playAudio('{{ song_data.song }}','{{ song_data.song_name }}','{{ song_data.song_profile }}','{{ song_ratings[song_id] }}','{{song_id}}')">
+   
+
+    <div class="cards{{ song_data.song_name }}" id= "card-img">
+      <img
+        src="data:image/jpeg;base64,{{ song_data.song_profile }}"
+        alt="Song Image"
+       class="card-img-top"
+       
+      />  </div>  
+     <div class="card-body d-flex justify-content-between">
+        <p class="card-text">{{ song_data.song_name }}
+        <br>
+         <a href="/posts/{{ song_data.author}}">
+        <span class="username">{{ song_data.author }}</span>
+      </a>
+    </p>
+        
+        <div>
+          <button type="button" class="btn btn-sm" data-bs-toggle="dropdown">
+           <span class="font-weight-bold" style="color:white"> &#10247;</span>
+         </button>
+             <ul class="dropdown-menu"  style="background-color: black;">
+              {% if current_user.id == song_data.userId or user.is_admin  %}
+               <li>
+                  <a href="/delete-post/{{ song_id }}" class="dropdown-item">Delete</a>
+
+                </li>
+                     {% endif %}
+                <li>
+                  <form method="POST" action="/rate_song/{{ song_id }}">
+      
+                  <select  class="dropdown-item" id="rating" name="rating">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                  </select>
+                  <button type="submit"  class="dropdown-item" class="btn btn-primary btn-sm">Rate</button>
+              </form>
+                          </li>
+
+             </ul>
+        </div>
+      </div>
+
+ <!-- Display the average rating -->
+    </div>
+    
+
+    {% endfor %}
+ </div>
+</div>
+{% endif %}
+
+<div class="section2">
+  <div class="section1-heading">
+    <p>Recent Playlists</p>
+  </div>
+  <div class="section1-content">
+    {% for playlist_id, playlist_data in playlists.items() %}
+      <div class="card">
+        <a href="/playlists/{{ playlist_id }}">
+          <div class="cards{{ playlist_data.name }}" id="card-img">
+            <img
+              src="data:image/jpeg;base64,{{ playlist_data.image }}"
+              alt="Playlist Image"
+              class="card-img-top"
+            />
+          </div> 
+
+
+          <div class="card-body d-flex justify-content-between">
+            <p class="card-text card-text1">
+                      
+             {{ playlist_data.name }} {{playlist_ratings[playlist_id]}} <br>
+              <a href="/playlists/{{ playlist_id }}"> 
+                <span class="discription">{{ playlist_data.description }}</span>
+              </a> 
+            </p>
+           
+            <div>
+              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown">
+                <span class="font-weight-bold" style="color:white"> &#10247;</span>
+              </button>
+              <ul class="dropdown-menu" style="background-color: black;">
+               {% if current_user.id == playlist_data.userId or user.is_admin  %}
+                <li>
+                  <a href="/delete-playlist/{{ playlist_id }}" class="dropdown-item">Delete</a>
+                </li>
+                {% endif %}
+                <li>
+                  <form method="POST" action="/rate_playlist/{{ playlist_id }}">
+      
+                  <select  class="dropdown-item" id="playlist_rating" name="playlist_rating">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                  </select>
+                  <button type="submit"  class="dropdown-item" class="btn btn-primary btn-sm">Rate</button>
+              </form>
+                </li>
+              </ul>
+            </div>
+            
+
+          </div>
+         
+        </a>
+      </div>
+    {% endfor %}
+     
+    <a href="/create-post">
+    <div class="card" class="create-post" id="playlist">
+      <div class="icon2">
+        <i class="fa-light fa-plus"></i>
+      </div>
+    </div>
+    </a>
+    
+    
+  </div>
+  
+</div>
+
+
+<div class="section2">
+  <div class="section1-heading">
+    <p>Albums</p>
+  </div>
+  <div class="section1-content">
+    {% for album_id, album_data in album.items() %}
+      <div class="card">
+        <a href="/album/{{album_id}}">
+          <div class="cards{{ album_data.name }}" id="card-img">
+            <img
+              src="data:image/jpeg;base64,{{ album_data.image }}"
+              alt="Playlist Image"
+              class="card-img-top"
+            />
+          </div> 
+
+
+          <div class="card-body d-flex justify-content-between">
+            <p class="card-text card-text1">
+                      
+             {{ album_data.name }} <br>
+              <a href="/album/{{album_id}}"> 
+                <span class="discription">{{ album_data.artist }}</span>
+              </a> 
+            </p>
+           
+            <div>
+              <button type="button" class="btn btn-sm" data-bs-toggle="dropdown">
+                <span class="font-weight-bold" style="color:white"> &#10247;</span>
+              </button>
+              <ul class="dropdown-menu" style="background-color: black;">
+               {% if current_user.id == album_data.userId or user.is_admin  %}
+                <li>
+                  <a href="/delete-album/{{ album_id }}" class="dropdown-item">Delete</a>
+                </li>
+                {% endif %}
+                
+              </ul>
+            </div>
+            
+
+          </div>
+         
+        </a>
+      </div>
+    {% endfor %}
+     
+  </div>
+  
+</div>
+
+ 
+
+<div class="section1"  >
+  <div class="section1-heading">
+    <p > Recent Song's</p>
+  </div>
+   
+ <div class="section1-content">
+
+{% for song_id, song_data in songs.items()|reverse %}
+ 
+  <div class="card"  onclick="playAudio('{{ song_data.song }}','{{ song_data.song_name }}','{{ song_data.song_profile }}','{{ song_ratings[song_id] }}','{{song_id}}')">
+   
+
+    <div class="cards{{ song_data.song_name }}" id= "card-img">
+      <img
+        src="data:image/jpeg;base64,{{ song_data.song_profile }}"
+        alt="Song Image"
+       class="card-img-top"
+       
+      />  </div>  
+     <div class="card-body d-flex justify-content-between">
+        <p class="card-text">{{ song_data.song_name }}
+        <br>
+         <a href="/posts/{{ song_data.author}}">
+        <span class="username">{{ song_data.author }}</span>
+      </a>
+    </p>
+        
+        <div>
+          <button type="button" class="btn btn-sm" data-bs-toggle="dropdown">
+           <span class="font-weight-bold" style="color:white"> &#10247;</span>
+         </button>
+             <ul class="dropdown-menu"  style="background-color: black;">
+              {% if current_user.id == song_data.userId or user.is_admin  %}
+               <li>
+                  <a href="/delete-post/{{ song_id }}" class="dropdown-item">Delete</a>
+
+                </li>
+                     {% endif %}
+                <li>
+                  <form method="POST" action="/rate_song/{{ song_id }}">
+      
+                  <select  class="dropdown-item" id="rating" name="rating">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                  </select>
+                  <button type="submit"  class="dropdown-item">Rate</button>
+              </form>
+                          </li>
+
+             </ul>
+        </div>
+   
+        
+        
+      </div>
+
+ <!-- Display the average rating -->
+  
+    </div>
+    
+
+    {% endfor %}
+
+    {% if current_user.is_admin or current_user.is_creater %}
+    
+   
+    <a href="/create-post">
+    <div class="card" id="playlist" >
+    <div class="icon2">
+      <i class="fa-light fa-plus"></i>
+      </div>
+    </div>
+      </a>
+    {% endif %}
+ </div>
+</div>
+<br/>
+<br/>
+<br/>
+
+ <br/>
+<br/>
+<br/>
+ <br/>
+<br/>
+<br/>
+ 
+
+</div>
+
+
+
+{% block audio %}
+
+
+
+     <div class="search" >
+    <br />
+    <a href="/search-songs">
+      <span class="icon"><i class="fas fa-magnifying-glass"></i></span>
+    </a>
+  </div>
+
+
+
+<footer class="fixed-footer">
+    <div class="footer d-flex justify-content-between align-items-center">
+        <div class="footer-img">
+            <a class="song" href="">
+                <img src="{{ url_for('static', filename='assets/download.jpg') }}" alt="Song Image" class="song-image" height="50px" width="50px" />
+            </a>
+        </div>
+        <div class="song-details">
+            <p id="song-name" class="song-name">Song</p>
+     
+        <div class="rating">
+            
+            <p class="song-rate">Rating</p><i class="fas fa-star"></i>
+        </div>   </div>
+        <div class="audio-controls">
+            <audio id="audio-player" class="audio" controls>
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function playAudio(songData, songName, songProfile,songRate,songId) {
+        var audioPlayer = document.getElementById('audio-player');
+        var songNameElement = document.getElementById('song-name');
+
+        audioPlayer.src = 'data:audio/mp3;base64,' + songData;
+        audioPlayer.play();
+        songNameElement.textContent = songName;
+
+        var songImageElement = document.querySelector('.song-image');
+        songImageElement.src = "data:image/jpeg;base64,"+songProfile;
+
+        var songrateElement = document.querySelector('.song-rate');
+         songrateElement.textContent = parseFloat(songRate).toFixed(1);
+
+        var songLink = document.querySelector('.song');
+        songLink.href = "/song/" + songId;
+
+
+    }
+</script>
+{% endblock audio %}
+
+{% endblock  %}
+

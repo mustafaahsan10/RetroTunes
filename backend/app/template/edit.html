@@ -1,0 +1,180 @@
+{% extends "base.html" %} {% block title %}Song upload{% endblock title %} {% block
+content %}
+  <div class="edit-songs">
+  <div>
+    
+  
+ 
+  
+  {% if request.path.startswith('/edit-song/') %}
+  <div class="create-heading" align="center">
+    <h1>Edit Song</h1>
+  </div>
+  <br>
+  
+    
+<form method="POST" enctype="multipart/form-data">
+
+  
+  <div class="mb-3 row">
+    <label for="song_name" class="col-sm-2 col-form-label">edit name</label>
+    <div class="col-sm-10">
+      <textarea name="song_name"   id="text" class="form-control">{{song.song_name}}</textarea>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="song_profile" class="col-sm-2 col-form-label"> <div class="profile edit-image">
+        <a href="#"> <img src="data:image/jpeg;base64,{{ song_profile }}" class="song-profile-img"></a>
+    </div></label>
+    
+    <div class="col-sm-10">
+       <input
+      type="file"
+      name="song_profile"
+      id="song_profile  formFile"
+      accept="image/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    />
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="post_song" class="col-sm-2 col-form-label"> <i class="fas fa-audio fa-1.5x"></i>edit song</label>
+    <div class="col-sm-10">
+      <input
+      type="file"
+      name="post_song"
+      id="post_song  formFile"
+      accept="audio/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    /> <br/>
+    </div>
+  </div>
+
+    <div class="mb-3 row">
+    <label  for="lyrics_text" class="col-sm-2 col-form-label"> <i class="fas fa-file fa-1.5x"></i></label>
+    <div class="col-sm-10">
+       <input
+      type="file"
+      name="lyrics_text"
+      id="lyrics_text  formFile"
+      accept="text/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    /><br />
+
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+  
+       <div class="col">
+        <div class="col-sm-10">
+            <select name="genre" class="form-select">
+                <option activ>{{song.gernre}}</option>
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="hip-hop">Hip-Hop</option>
+                <option value="hip-hop">Melody</option>
+                <option value="hip-hop">chill</option>
+            </select>
+        </div>
+         </div>
+        <div class="col">
+            <div class="col-sm-10">
+                <textarea name="artist" placeholder="Artist name"  id="text" class="form-control">{{song.artist}}</textarea>
+            </div>
+         </div>
+         
+
+
+    </div>
+
+  <div align="center">
+    <button type="submit" class="btn btn-lg btn-outline-info">Post</button>
+  </div>
+</form>
+
+{% elif  request.path.startswith('/edit-album/')  %}
+
+
+
+<div class="create-heading" align="center">
+    <h1>Edit Album</h1>
+</div>
+<br>
+   
+   <form method="POST" enctype="multipart/form-data">
+
+  <div class="mb-3 row">
+    <label for="name" class="col-sm-2 col-form-label">Album Name:</label>
+    <div class="col-sm-10">
+      <textarea name="album_name" placeholder="Enter Album Name"  id="text" class="form-control"></textarea>
+    </div>
+  </div>
+
+    <div class="mb-3 row">
+    <label for="description" class="col-sm-2 col-form-label">Artist Name:</label>
+    <div class="col-sm-10">
+      <textarea name="artist_name"  placeholder="Enter Artist Name"  id="text" class="form-control"></textarea>
+    </div>
+  </div>
+
+
+        
+   <div class="mb-3 row">
+    <label for="album_profile" class="col-sm-2 col-form-label"><i class="fas fa-image fa-1.5x"></i> Album profile </label>
+    <div class="col-sm-10">
+       <input
+      type="file"
+      name="album_profile"
+      id="ablum_profile  formFile"
+      accept="image/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    />
+    </div>
+  </div>
+
+   <div class="mb-3 row">
+        <label for="ablum_genre" class="col-sm-2 col-form-label">
+            <i class="fas fa-audio fa-1.5x"></i> Choose gernre
+        </label>
+        <div class="col-sm-10">
+            <select name="genre" class="form-select">
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="hip-hop">Hip-Hop</option>
+                <option value="hip-hop">Melody</option>
+                <option value="hip-hop">chill</option>
+                
+            </select>
+        </div>
+    </div>
+
+
+
+        
+        <br>
+  <div align="center">
+    <button type="submit" class="btn btn-lg btn-outline-info">Post</button>
+  </div>
+    </form>
+
+
+  {% else %}
+  
+<div class="create-heading" align="center">
+    <h1>unwanted move </h1>
+</div>
+
+</div>
+    
+
+  {% endif %}
+
+   </div>
+{% endblock content%} 

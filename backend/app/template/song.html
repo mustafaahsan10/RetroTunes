@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Song Lyrics{% endblock title %}
+
+{% block content %}
+
+<div class="song-profile">
+    <div class="song-heading">
+        <div class="song-img">
+            <img src="data:image/jpeg;base64,{{ song_profile }}" class="song-profile-img">
+        </div>
+        <div class="profile-name">
+            <h2>{{ song.song_name }}</h2> 
+            
+            <h5><a class="song-profile-user" href="/posts/{{  song.user.username }}">{{ song.user.username }}   </a> 
+            {% if song.author==current_user.id or current_user.is_admin %}
+             <a href="/edit-song/{{song.id}}"> <i class="fa-solid fa-pen" style="color: #ffffff;"></i></a>
+            
+            {% endif %}
+             </h5>
+            <p  class="rating-star"> {{average_rating }}   <i class="fas fa-star  star"></i></p>
+            
+        </div>
+    </div>
+
+
+    <div class="song-content">
+        
+    
+    <div class="song-lyrics">
+        
+        <pre>{{ lyrics|safe }}</pre>
+    </div>
+    </div>
+    
+    
+    </div>
+
+
+<footer class="fixed-footer">
+    <div class="footer  d-flex justify-content-between">
+      
+     <audio id="audio-player" src="data:audio/mp3;base64,{{ songs }}" controls>
+        Your browser does not support the audio element.
+    </audio>
+        
+        
+    </div>
+    
+</footer>
+<script>
+    // Automatically play the audio when the page loads
+    window.onload = function() {
+        var audioPlayer = document.getElementById('audio-player');
+        audioPlayer.play();
+    };
+</script>
+
+  
+
+{% endblock content %}
