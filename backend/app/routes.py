@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
-from .forms import LoginForm, RegisterForm, PurchaseItemForm, SellItemForm
+from .forms import LoginForm, RegisterForm, PurchaseItemForm, SellItemForm, AddItemForm, SetBudgetForm
 from .models import User, Item
 from .extensions import db
 
@@ -16,29 +16,63 @@ market_bp = Blueprint('market', __name__)
 def market_page():
     purchase_form = PurchaseItemForm()
     sell_form = SellItemForm()
+
+    # Handle POST request for buying or selling items
     if request.method == "POST":
-        if 'purchase' in request.form and purchase_form.validate_on_submit():
-            item_obj = Item.query.filter_by(name=request.form.get('purchased_item')).first()
+        purchased_item_name = request.form.get('purchased_item')
+        sold_item_name = request.form.get('sold_item')
+
+        if purchased_item_name:
+            item_obj = Item.query.filter_by(name=purchased_item_name).first()
             if item_obj and current_user.can_purchase(item_obj):
                 item_obj.buy(current_user)
+                db.session.commit()
                 flash(f"Congratulations! You purchased {item_obj.name} for {item_obj.price}$", category='success')
             else:
-                flash("Unfortunately, you don't have enough money to purchase this item!", category='danger')
+                flash("Not enough money to purchase this item or item not found.", category='danger')
 
-        elif 'sell' in request.form and sell_form.validate_on_submit():
-            item_obj = Item.query.filter_by(name=request.form.get('sold_item')).first()
+        if sold_item_name:
+            item_obj = Item.query.filter_by(name=sold_item_name).first()
             if item_obj and current_user.can_sell(item_obj):
                 item_obj.sell(current_user)
+                db.session.commit()
                 flash(f"Congratulations! You sold {item_obj.name} back to market!", category='success')
             else:
                 flash("Something went wrong with selling this item!", category='danger')
 
+        return redirect(url_for('market.market_page'))
+
+    # Retrieve items for GET request
+    items = Item.query.filter(Item.owner_id.is_(None)).all()  # Items available for purchase
+    owned_items = Item.query.filter_by(owner_id=current_user.id).all()  # Items owned by current user
+
+    return render_template('MARKET.html', items=items, owned_items=owned_items, purchase_form=purchase_form, sell_form=sell_form)
+
+
+@market_bp.route("/add_item", methods=['GET', 'POST'])
+@login_required
+def add_item():
+    if not current_user.is_admin:
+        flash("Only admin users can access this page.", category="error")
         return redirect(url_for('market_page'))
+    
+    form = AddItemForm()
+    if form.validate_on_submit():
+        new_item = Item(
+            name=form.name.data,
+            barcode=form.barcode.data,
+            price=form.price.data,
+            description=form.description.data,
+            owner_id=None  # Assuming items are owned by the store/admin initially
+        )
+        db.session.add(new_item)
+        db.session.commit()
+        flash('New item added successfully!', category='success')
+        return redirect(url_for('market.market_page'))
+    
+    return render_template('add_item.html', form=form)
 
-    items = Item.query.filter(Item.owner_id == None).all()
-    owned_items = Item.query.filter_by(owner_id=current_user.id).all()
 
-    return render_template('MARKET.html', title='Market', item=items, owned_item=owned_items, purchase_form=purchase_form, sell_form=sell_form)
 
 # Authentication and administration routes
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -68,6 +102,21 @@ def register():
         flash('Account created successfully! You are now logged in.')
         return redirect(url_for('market.market_page'))
     return render_template('REGISTER.html', form=form)
+
+@market_bp.route('/set_budget', methods=['GET', 'POST'])
+@login_required
+def set_budget():
+    form = SetBudgetForm()
+    if form.validate_on_submit():
+        if current_user.check_password(form.password.data):  # Assuming there's a password field in SetBudgetForm to confirm changes
+            current_user.budget = form.budget.data
+            db.session.commit()
+            flash('Your budget has been updated successfully!', 'success')
+            return redirect(url_for('market.market_page'))
+        else:
+            flash('Invalid password. Please try again.', 'danger')
+    return render_template('set_budget.html', form=form)
+
 
 @auth_bp.route('/logout')
 def logout():

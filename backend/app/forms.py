@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
+from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError, NumberRange
 from .models import User  # Ensure the User model is correctly imported from your integrated models.py
 
 # Register Form
@@ -33,3 +33,15 @@ class PurchaseItemForm(FlaskForm):
 # Sell Item Form
 class SellItemForm(FlaskForm):
     submit = SubmitField(label='Sell Item!')
+
+class AddItemForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    barcode = StringField('Barcode', validators=[DataRequired()])
+    price = StringField('Price', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
+    submit = SubmitField('Add Item')
+
+class SetBudgetForm(FlaskForm):
+    budget = IntegerField("Budget", validators=[DataRequired(), NumberRange(min=0)])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Set Budget")

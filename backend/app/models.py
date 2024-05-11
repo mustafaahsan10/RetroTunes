@@ -28,6 +28,7 @@ class User(db.Model,UserMixin):
     date_created = db.Column(db.DateTime(timezone=True),default=func.now())
     is_admin = db.Column(db.Boolean, default=False)
     is_creator = db.Column(db.Boolean, default=False)
+    budget = db.Column(db.Integer, default=1000)
     Song = db.relationship("Song",backref="user",passive_deletes=True)
     playlists = db.relationship('Playlist', back_populates='user')
     album=db.relationship("Album",back_populates='user')
@@ -65,6 +66,39 @@ class Item(db.Model):
     
     def __repr__(self):
         return f'Item {self.name}'
+    @property
+    def prettier_price(self):
+        if len(str(self.price)) >= 4:
+            return f'{str(self.price)[:-3]},{str(self.price)[-3:]} $'
+        else:
+            return f'{self.price} $'
+
+    def buy(self, user):
+        if user.budget >= self.price:
+            self.owner_id = user.id
+            user.budget -= self.price
+            db.session.commit()
+        else:
+            raise Exception("Insufficient funds to purchase this item.")
+
+    def sell(self, user):
+        if self.owner_id == user.id:
+            self.owner_id = None
+            user.budget += self.price
+            db.session.commit()
+        else:
+            raise Exception("This user cannot sell an item they do not own.")
+    
+    def delete_item(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update_item(self, name, price, barcode, description):
+        self.name = name
+        self.price = price
+        self.barcode = barcode
+        self.description = description
+        db.session.commit()
 
 # Music related models
 class Song(db.Model):
