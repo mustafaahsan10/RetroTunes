@@ -1,0 +1,44 @@
+<div class="modal fade" id="Info-{{ item.id }}" tabindex="-1" aria-labelledby="InfoLabel{{ item.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #212121;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="InfoLabel{{ item.id }}"><strong>{{ item.name }}</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <strong>Barcode:</strong> {{ item.barcode }}
+                <br><strong>Price:</strong> {{ item.prettier_price }}
+                <br><strong>Description:</strong> {{ item.description }}
+                {% if item.owner_id %}
+                <br><strong>Owner:</strong> {{ item.owner_id }}
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Buy-{{ item.id }}" tabindex="-1" aria-labelledby="BuyLabel{{ item.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #212121;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="BuyLabel{{ item.id }}"><strong>{{ item.name }}</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    {{ purchase_form.hidden_tag() }}
+                    <p class="text-capitalize">Hey, {{current_user.username}}!</p>
+                    <p>Are you sure you want to buy <strong>{{ item.name }}</strong> for <strong>{{ item.prettier_price }}</strong>?</p>
+                    <div class="modal-footer">
+                        <input id="purchased_item" name="purchased_item" type="hidden" value="{{item.name}}">
+                        {{ purchase_form.submit(class="btn btn-outline-success") }}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
