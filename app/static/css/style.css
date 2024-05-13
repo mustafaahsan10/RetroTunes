@@ -1,0 +1,971 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'); 
+body {
+  font-family: Inter;
+  font-weight: 700;
+
+  position: relative;
+  min-height: 100vh;
+
+  color: #ffffff;
+  background: linear-gradient(black,rgb(91, 1, 91));
+    
+  background-attachment: fixed;
+}
+
+a{
+   text-decoration: none !important; 
+  outline: none !important;
+}
+
+/* ..................................for navbar....................................... */
+
+.navbar{
+  --bs-navbar-padding-y: 0rem !important;
+  color: white;
+  
+}
+
+
+.navbar-ali{
+  font-size: 70px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-family: Satoshi;
+  text-align: center;
+  width: 404px;
+  height: 53px;
+  color:white;
+}
+
+.header_section{
+  color:  #bc62e9;
+  background-color:  #29282a00;
+  font-family: Inter;
+  font-weight: 700;
+  
+
+}
+.nav-item{
+  color: white !important;
+  text-align: center;
+  cursor: pointer;
+  font-family: Inter;
+  font-weight: 700;
+}
+.nav-item:hover{
+  background-color:  #80419fdb!important;
+
+  transition: 2ms;
+  backdrop-filter: blur(50px);
+  color:  black !important;
+  border-radius: 5px;
+  font-family: Inter;
+  font-weight: 700;
+}
+.logo span{
+  font-family: Inter;
+  font-weight: 700;
+  font-size: 30px;
+  color: white;
+}
+.logo span:hover{
+  color:  white !important;
+}
+
+/* .....................................main................................................ */
+.main{
+  min-height: 100vh;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  align-items: center;
+  gap: 2rem;
+  color: #bc62e991;
+  font-size: 30px;
+}
+
+section{
+  padding: 0 6%;
+}
+
+.main-text h1{
+  color:rgba(0, 0, 0, 0);
+  font-size: 50px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  -webkit-text-stroke: 1px white;
+  font-family: Inter;
+  font-weight: 700;
+
+}
+
+
+.main-text h3{
+  font-size: 60px;
+  
+  font-family: Inter;
+  font-weight: 700;
+  color:#ffffff ;
+}
+.main-text h5{
+  margin: -3%;
+  font-size: 90px;
+  font-family: Inter;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-decoration-color: solid 2px white;
+  background: linear-gradient(170deg,#b83af7,#b83af7,#b83af7,#b83af78d,#b83af7,#b83af7,#b83af7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% 300%;
+  animation: gradient 8s ease-in-out infinite;
+}
+
+
+.main img{
+  width: 90%;
+  height: 45%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  /* Set the blending mode */
+  background-blend-mode: multiply;
+}
+@keyframes gradient{
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  70%{
+    background-position: 100% 70%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+.and h1{
+  margin: -3%;
+  padding-left: 40px;
+  font-size: 80px ;
+}
+.and h5{
+  margin-top: -20%;
+  padding-left: 15px;
+
+}
+.main_section{
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  
+  padding: 10px;
+}
+
+
+/* .....................................create-post..................................... */
+.content{
+ color: white;
+ display: block;
+ align-items: center;
+}
+
+.carousel{
+  padding: 20px;
+  width: 60%;
+}
+.carousel-control-next, .carousel-control-prev {
+  position: absolute;
+  top:100% !important;
+  bottom: 0; 
+}
+.create-heading,.create_album h1,.create_playlist h1{
+ font-family: 'Rubik', sans-serif;
+ padding-top: 30px;
+}
+.form-control {
+  color: black !important;
+  
+  background-color: white !important;
+  border:rgb(39, 8, 40);
+  border-radius: 4px;
+}
+.label{
+  color:white !important;
+}
+label{
+  font-family: 'Lato', sans-serif;
+  font-weight: 200;
+}
+
+textarea::placeholder {
+  color: rgb(255, 255, 255) !important;
+}
+/* ........................................edit-post................................ */
+.edit-songs{
+  padding: 20px;
+  margin: 10px;
+  
+ 
+}
+.edit-songs label{
+  color: white;
+}
+.edit-image{
+  margin-top: -20%;
+  margin-left: -10%;
+}
+
+/* ........................................album....................................... */
+.album-profile{
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.table3{
+  display: flex;
+  flex: 1;
+  padding: 10px;
+  background-color: rgba(7, 6, 7, 0.481);
+  border-radius: 20px;
+}
+.custom-table1{
+  background-color: #00000000 !important;
+
+}
+
+.custom-table1 td,th {
+  background-color: #00000000!important;
+  border: none;
+  color: white !important;
+  
+}
+
+
+.album-first{
+  display: flex;
+  flex: 1;
+}
+.album-second{
+  display: flex;
+  flex: 2;
+  overflow-y: scroll;
+}
+
+
+/*...................................for scrollbar/...................................... */
+
+
+::-webkit-scrollbar {
+  width: 1px;
+ height: 1px; }
+
+::-webkit-scrollbar-track {
+  background: #0f0f0f00; 
+  
+}
+
+::-webkit-scrollbar-thumb {
+  
+  background:#bc63e8; 
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+  background: #555; 
+}
+
+/*.....................................for table........................................ */
+.custom-table {
+  background-color: #00000065 !important;
+  
+}
+
+.custom-table th {
+  background-color: #00000069 !important;
+  color: #7f419edb  !important;
+  border: none;
+}
+
+.custom-table td {
+  background-color: #00000000!important;
+  color: #9b9696 !important;
+  border: none;
+  
+}
+
+
+.custom-table-bordered{
+  border: none !important;
+}
+
+.heading{padding: 20px;}  
+
+
+.profile img{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover ;
+ 
+}
+
+
+/* .............................................................homepage...................................................................... */
+
+.section1-heading{
+  font-family: Inter;
+  font-weight: 700;
+  padding: 10px;
+  font-size: 2rem;
+  color: white;
+}
+.section1-content{
+background-color: none;
+font-family: Inter;
+font-weight: 700;
+}
+
+.table-items{
+  max-width: 300px;
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-around;
+  padding-top: 10px;
+}
+
+.section1-content {
+  display: flex; 
+  overflow-x: scroll; 
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+
+.card {
+  flex: 0 0 auto; 
+  background-color: rgb(27, 1, 27) !important;
+  
+  margin: 5px;
+  padding: 5px;
+  height:5rem;
+  width:10rem;
+  cursor: pointer;
+  color:white !important;
+  border: 2px solid rgb(27, 1, 27);
+  transition: box-shadow 0.2s;
+
+}
+.card a {
+  font-size: 1rem;
+  text-decoration: none; 
+  outline: none; 
+  color: #ffffff;
+}
+
+.card:hover {
+  background-color:  #7f409e92 !important;
+  color: #ffffff !important;
+}
+
+#card-img img{
+  width: 9rem;
+   height: 9rem;
+   border-radius: 10px !important;
+}
+.card img {
+  padding: 5px;
+  height: 100%;
+  width: 92%;
+  padding-bottom: 0 !important;
+  object-fit: cover ;
+}
+
+
+.card-body {
+  padding-left: 10px !important;
+  padding-bottom: 0 !important;
+  padding-top: 2px !important;
+  font-family: Inter;
+  font-weight: 700;
+}
+.card-body a .username{
+  
+  font-size: small;
+  text-decoration: none; 
+  outline: none; 
+  font-family: Inter;
+  font-weight: 700;
+  color: rgba(109, 139, 170, 0.737);
+}
+.discription {
+  font-size: small;
+  text-decoration: none;
+  outline: none;
+  color: rgb(76, 69, 82);
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap; 
+  font-family: Inter;
+  font-weight: 700;
+}
+
+.discription:hover,.card-body .username:hover{
+  color: #17f0ccdb ;
+  font-family: Inter;
+  font-weight: 700;
+}
+
+.card-text{
+  font-family: Inter;
+  font-weight: 700;
+  
+  color: white;
+  max-height: 50px;
+  overflow: hidden;
+}
+.card-text1{
+    padding: 4px;
+    font-family: Inter;
+    font-weight: 700;
+}
+.card-text1 a{
+  font-size: 15px;
+  font-family: Inter;
+  font-weight: 700;
+}
+
+.userprofile img{
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+
+  object-fit: cover ;
+}
+.profile-usertype{
+  color: #747474;
+}
+
+
+/* ...................................profile................................... */
+
+.profile{
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  
+  padding: 10px;
+}
+
+.profile_data{
+padding-left: 40px;
+}
+
+.profile-img{
+  border-radius: 50%
+
+}
+
+.profile-username h1{
+  font-size: 4rem;
+  font-family: 'Rubik', sans-serif;
+
+  color: white ;
+ 
+}
+.profile-name h2{
+  font-family: Inter;
+  font-weight: 700;
+  
+}
+
+
+/* ......................................admin dashboard................................... */
+.admin_section{
+  padding: 10px;
+  max-width: 100%;
+}
+.admin_section1{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  
+}
+.admin_card{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+}
+.first_row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.second_row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.admin_image img{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.block {
+  background-color:#00000069 ;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.statistics {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 10px;
+  text-align: center;
+  align-items: center;
+  flex: 3;
+  
+}
+
+.statistics h4 {
+  color: white;
+  margin: 10px 0;
+  font-size: 3rem;
+}
+
+/* Chart section */
+.chartjs {
+  background-color: #00000069 ;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+ 
+}
+#myChart2{
+  max-height: 200px;
+ 
+}
+
+.unwanted-move{
+  font-size: 30px;
+  padding: 40px;
+  text-align: center;
+
+}
+
+/* ...................................footer.................................... ..........*/
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: small;
+  text-decoration: none;
+  outline: none;
+  background-color: rgb(231, 175, 231);
+  padding: 10px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.song-name {
+  font-size: medium;
+  text-decoration: none;
+  outline: none;
+  color: #1a0326;
+  text-align: center;
+  padding: 10px;
+  padding-bottom: 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+.fixed-footer img {
+  border-radius: 50px;
+}
+.song-rate{
+  color:black;
+}
+.song-image {
+  height: 50px;
+  width: 50px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  color:orange;
+  border-color:black;
+}
+
+.rating p {
+  margin: 0;
+}
+
+.audio-controls {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+#audio-player {
+  padding-top: 3px;
+
+}
+
+/* ...............................for audioo.................................... */
+
+     audio::-webkit-media-controls-panel {
+    
+     color: #000;
+     /* background-color: #000000;*/
+     background-color:rgb(231, 175, 231);
+     /*box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);*/
+     border:rgb(73, 8, 73);
+     }
+     audio::-webkit-media-controls-play-button{
+      background-color:rgb(231, 175, 231) ;
+      color:rgb(53, 6, 53);
+      
+    }
+
+     audio::-webkit-media-controls-current-time-display,
+     audio::-webkit-media-controls-time-remaining-display {
+         color: rgb(73, 8, 73);
+    
+     }
+ 
+audio::-webkit-media-controls-play-button{
+  color:white;
+}
+
+audio {
+  width: 100%;
+ 
+}
+
+/* ..............................................creator..................................... */
+.search {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+}
+
+.icon {
+  font-size: 15px;
+  width: 50px;
+  height: 50px;
+  padding-top: 15px;
+  display: inline-block; 
+  text-align: center; 
+  background-color: #ab649e; 
+  color: #ffffff; 
+  border: 3px solidrgb(255, 255, 255)3; 
+  border-radius: 50%; 
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.icon2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6rem;
+  color: rgb(156, 156, 151);
+  font-weight: 100;
+  padding-top:31px ;
+  padding-bottom: 30px;
+}
+
+.icon3 {
+ 
+  padding: 3px;
+ 
+  font-size: 2rem;
+  color: rgb(156, 156, 151);
+
+}
+
+.icon4 a {
+  padding: 5px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #7f419edb !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.icon:hover {
+  background-color:#ab649e; 
+  color: #bc62e9; 
+}
+
+.song-heading,.playlist-heading,.buttons{
+  padding: 30px;
+  display: flex;
+  font-family: Inter;
+  font-weight: 700;
+  color:white;
+  flex-wrap: wrap;
+}
+.song-img{
+  padding: 20px;
+  height:13rem;
+  width: 13rem;
+
+}
+.song-profile-img{
+  height: 100%;
+  width:100%;
+  object-fit: cover ;
+  border-radius: 10px;
+}
+
+.song-heading,.playlist-heading,h2 {
+  padding: 10px;
+  font-size: 4rem !important;
+  outline: none; 
+  color: white;
+}
+
+.song-content{
+  padding: 30px;
+}
+.song-profile-user{
+  padding: 10px;
+  color: #949096;
+}
+
+.song-profile-user:hover{
+  color: #b83af7;
+}
+.rating-star{
+  padding: 10px;
+
+  font-size: small;
+  
+}
+.song-lyrics{
+  padding: 30px;
+  border: solid  #bc62e9 2px;
+  outline: none; 
+  color: #bc62e9; 
+  border-radius: 20px;
+}
+
+/* ..........................................login/signup........................ */
+.form{
+  max-width: 100%;
+}
+
+.profile_icon{
+  justify-content: center;
+  padding: 10px;
+  margin: 20px auto;
+  margin-bottom: 0px;
+  text-align: center;
+  border: 2px solid #bc62e9;
+  width: fit-content;
+  border-radius: 30px;
+  font-size: 20px;
+}
+
+
+.box {
+    color: white;
+    width: 500px;
+    padding: 40px;
+    position: relative;
+    background: #ea64e4;
+    
+    
+    text-align: center;
+    justify-content: center;
+    border-radius: 68px;
+  }
+
+  .box h3 {
+    color: black;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 40px;
+    font-family: Inter;
+    font-weight: 700;
+  }
+
+  .box input[type="text"],
+  .box input[type="password"] {
+
+    background: white !important;
+    display: block;
+    margin: 20px auto;
+    font-family: Inter;
+    text-align: center;
+    border: 3px solid white;
+    padding: 14px 10px;
+    width: 300px;
+    outline: none;
+    color: rgb(37, 36, 36);
+    border-radius: 24px;
+    transition: 0.2s;
+
+  }
+
+  .box input[type="text"]:focus,
+  .box input[type="password"]:focus {
+    width: 280px;
+    border-color: #bc62e991;
+  }
+   
+
+  .ct_btn,
+  .box button[type="submit"] {
+    background: rgb(40, 196, 40);
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    font-family: Cambria;
+    font-size: 20px;
+    border: 2px solid rgb(40, 196, 40);
+    padding: 10px 25px;
+    outline: none;
+    color: white;
+    border-radius: 20px;
+    transition: 0.1s;
+    cursor: pointer;
+  }
+  .ct_btn:hover,
+  .box button[type="submit"]:hover {
+
+    color: white;
+    background: #15861b;
+   
+  }
+
+  .form {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .from-values {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    color:black;
+  }
+  .inputs{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color:black;
+
+  }
+  
+
+
+
+/* ............................moblie................................... */
+
+@media screen and (max-width: 450px) {
+
+  /* song profile */
+  .song-heading {
+    background: transparent;
+  }
+  .song-img{
+    
+    width: 400px;
+    height: 400px;
+    padding-left: 30;
+  }
+  .profile-name{
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    padding: 20px;
+  }
+
+  /* user profile */
+
+  .profile{
+    justify-content: center;
+
+  }
+  .profile_data{
+    margin-top: -10;
+    padding: 0;
+    justify-content: center;
+  }
+  .profile-usertype{
+    position: relative;
+    text-align: center;
+  }
+  .carousel{
+    padding: 20px;
+    width: 100%;
+  }
+  .box {
+    width: 100%;
+    top: 60px;
+  }
+  .box h3 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 30px;
+    font-family: "Cambria";
+  }
+  .form{
+    padding: 0;
+    padding-top: 20px;
+    }
+    .table-items{
+      max-width: 50px;
+      padding-top: 3px;
+    }
+    section{
+      height: auto;
+      width: fit-content;
+      padding: 0 3%;
+      transition: 0.2s;
+    }
+  .main-img{
+    text-align: center;
+ 
+    overflow-x: hidden;
+
+  }
+  .main{
+    height: 100%;
+    gap:1rem;
+    grid-template-columns: 1fr;
+  }
+  .main-text{
+    margin-top:30%;
+  }
+  .edit-image{
+    margin-top: -3%;
+    margin-left: -30%;
+  }
+  }
