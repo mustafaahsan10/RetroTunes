@@ -1,0 +1,240 @@
+{% extends "base.html" %} {% block title %}Song upload{% endblock title %} {% block
+content %}
+
+<h1 class="create-heading" align="center">Make a post</h1>
+
+<div id="carousel" class="carousel slide mx-auto">
+  <div class="carousel-inner">
+  <div class="carousel-item active">
+
+{%if current_user.is_admin or current_user.is_creater %}
+<form method="POST" enctype="multipart/form-data">
+
+
+  <div class="mb-3 row">
+    <label for="song_name" class="col-sm-2 col-form-label">Song name</label>
+    <div class="col-sm-10">
+      <textarea name="song_name" placeholder="Enter song name"  id="text" class="form-control"></textarea>
+    </div>
+  </div>
+
+
+  <div class="mb-3 row">
+    <label for="song_profile" class="col-sm-2 col-form-label"><i class="fas fa-image fa-1.5x"></i>  Choose image </label>
+    <div class="col-sm-10">
+       <input
+      type="file"
+      name="song_profile"
+      id="song_profile  formFile"
+      accept="image/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    />
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="post_song" class="col-sm-2 col-form-label"> <i class="fa-solid fa-music fa-1.5x"></i>  Choose song </label>
+    <div class="col-sm-10">
+      <input
+      type="file"
+      name="post_song"
+      id="post_song  formFile"
+      accept="audio/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    /> 
+    </div>
+  </div>
+
+    <div class="mb-3 row">
+    <label  for="lyrics_text" class="col-sm-2 col-form-label"> <i class="fas fa-file fa-1.5x"></i>  Choose lyrics </label>
+    <div class="col-sm-10">
+       <input
+      type="file"
+      name="lyrics_text"
+      id="lyrics_text  formFile"
+      accept="text/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    /><br />
+
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+  <div class="col">
+    
+        <div class="col-sm-10">
+            <select name="genre" class="form-select">
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="hip-hop">Hip-Hop</option>
+                <option value="hip-hop">Melody</option>
+                <option value="hip-hop">chill</option>
+            </select>
+        </div>
+    </div>
+    <div class="col">
+      
+   
+   
+    <div class="col-sm-10">
+      <textarea name="artist" placeholder="Artist name"  id="text" class="form-control"></textarea>
+    </div>
+         </div>
+    </div>
+
+  <div align="center">
+    <button type="submit" class="btn btn-lg btn-outline-info">Post</button>
+  </div>
+</form>
+{%else%}
+
+<div   align="center" class=" unwanted-move">
+     <p > sorry your not a Creator </p>
+  <p> swap right to create a playlist </p>
+</div>
+{% endif %}
+</div>
+
+
+<div class="carousel-item">
+<div class="create_playlist">
+  
+
+    <h1>Create a New Playlist</h1>
+    <br>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+    
+
+  
+  <div class="mb-3 row">
+    <label for="name" class="col-sm-2 col-form-label">Playlist Name:</label>
+    <div class="col-sm-10">
+      <textarea name="playlist_name" placeholder="Enter song name"  id="text" class="form-control"></textarea>
+    </div>
+  </div>
+
+
+
+  <div class="mb-3 row">
+    <label for="description" class="col-sm-2 col-form-label">Playlist description:</label>
+    <div class="col-sm-10">
+      <textarea name="description"  placeholder="Enter song name"  id="text" class="form-control"></textarea>
+    </div>
+  </div>
+
+
+    <input 
+    class="form-control" 
+      name="playlist_profile" 
+      type="file" accept="image/*"
+       id="playlist_profile formFile " 
+       >
+       <br>
+       <br>
+        
+  <div align="center">
+    <button type="submit" class="btn btn-lg btn-outline-info">Post</button>
+  </div>
+    </form>
+
+</div>
+
+ </div>
+
+{% if current_user.is_creater or current_user.is_admin %}
+
+
+<div class="carousel-item">
+<div class="create_album">
+    <h1>Create a Album</h1>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+
+  <div class="mb-3 row">
+    <label for="name" class="col-sm-2 col-form-label">Album Name:</label>
+    <div class="col-sm-10">
+      <textarea name="album_name" placeholder="Enter Album Name"  id="text" class="form-control"></textarea>
+    </div>
+  </div>
+
+    <div class="mb-3 row">
+    <label for="description" class="col-sm-2 col-form-label">Artist Name:</label>
+    <div class="col-sm-10">
+      <textarea name="artist_name"  placeholder="Enter Artist Name"  id="text" class="form-control"></textarea>
+    </div>
+  </div>
+
+
+        
+   <div class="mb-3 row">
+    <label for="album_profile" class="col-sm-2 col-form-label"><i class="fas fa-image fa-1.5x"></i> Album profile </label>
+    <div class="col-sm-10">
+       <input
+      type="file"
+      name="album_profile"
+      id="ablum_profile  formFile"
+      accept="image/*"
+      class="form-control" 
+      onchange="displayFileName(this)"
+    />
+    </div>
+  </div>
+
+   <div class="mb-3 row">
+        <label for="ablum_genre" class="col-sm-2 col-form-label">
+            <i class="fas fa-audio fa-1.5x"></i> Choose gernre
+        </label>
+        <div class="col-sm-10">
+            <select name="genre" class="form-select">
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="hip-hop">Hip-Hop</option>
+                <option value="hip-hop">Melody</option>
+                <option value="hip-hop">chill</option>
+              
+            </select>
+        </div>
+    </div>
+
+
+
+        
+        <br>
+  <div align="center">
+    <button type="submit" class="btn btn-lg btn-outline-info">Post</button>
+  </div>
+    </form>
+
+</div>
+
+ </div>
+
+{% endif %}
+
+  </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  
+  </div>
+
+<br />
+<div align="center">
+  <a href="/home">
+    <button type="button" class="btn btn-lg btn-light">back</button></a
+  >
+  <br>
+  <br>
+</div>
+
+{% endblock %}
